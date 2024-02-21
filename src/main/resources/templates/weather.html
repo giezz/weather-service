@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <canvas id="tempChart" style="width:100%;max-width:600px"></canvas>
+    <canvas id="lightChart" style="width:100%;max-width:600px"></canvas>
+    <canvas id="humChart" style="width:100%;max-width:600px"></canvas>
+</div>
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 5000);
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const yValsTemp = /*[[${tempValues}]]*/ [];
+    const xValsTemp = /*[[${tempDates}]]*/[];
+    new Chart("tempChart", {
+        type: "line",
+        data: {
+            labels: xValsTemp,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValsTemp
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {min: 0, max: yValsTemp.max}}],
+            }
+        }
+    });
+    const yValsLight = /*[[${lightValues}]]*/ [];
+    const xValsLight = /*[[${lightDates}]]*/[];
+    new Chart("lightChart", {
+        type: "line",
+        data: {
+            labels: xValsLight,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValsLight
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {min: 0, max: yValsLight.max}}],
+            }
+        }
+    });
+    const yValsHum = /*[[${humValues}]]*/ [];
+    const xValsHum = /*[[${humDates}]]*/[];
+    new Chart("humChart", {
+        type: "line",
+        data: {
+            labels: xValsHum,
+            datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValsHum
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{ticks: {min: 0, max: yValsHum.max}}],
+            }
+        }
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
