@@ -29,14 +29,15 @@ public class WeatherRestController {
     public void weather(@RequestParam(required = false) BigDecimal temp,
                         @RequestParam(required = false) BigDecimal light,
                         @RequestParam(required = false) BigDecimal hum) {
+        final Instant now = Instant.now();
         if (temp != null) {
-            temperatureDatumRepository.save(new TemperatureDatum(temp, Instant.now()));
+            temperatureDatumRepository.save(new TemperatureDatum(temp, now));
         }
         if (light != null) {
-            lightDatumRepository.save(new LightDatum(light, Instant.now()));
+            lightDatumRepository.save(new LightDatum(light, now));
         }
         if (hum != null) {
-            humDatumRepository.save(new HumDatum(hum, Instant.now()));
+            humDatumRepository.save(new HumDatum(hum, now));
         }
     }
 }
