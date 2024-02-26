@@ -26,18 +26,21 @@ public class WeatherRestController {
     private final TemperatureDatumRepository temperatureDatumRepository;
 
     @GetMapping("/weather")
-    public void weather(@RequestParam(required = false) BigDecimal temp,
-                        @RequestParam(required = false) BigDecimal light,
-                        @RequestParam(required = false) BigDecimal hum) {
+    public void weather(@RequestParam(required = false) String temp,
+                        @RequestParam(required = false) String light,
+                        @RequestParam(required = false) String hum) {
         final Instant now = Instant.now();
         if (temp != null) {
-            temperatureDatumRepository.save(new TemperatureDatum(temp, now));
+            BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(temp));
+            temperatureDatumRepository.save(new TemperatureDatum(bigDecimal, now));
         }
         if (light != null) {
-            lightDatumRepository.save(new LightDatum(light, now));
+            BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(light));
+            lightDatumRepository.save(new LightDatum(bigDecimal, now));
         }
         if (hum != null) {
-            humDatumRepository.save(new HumDatum(hum, now));
+            BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(hum));
+            humDatumRepository.save(new HumDatum(bigDecimal, now));
         }
     }
 }
