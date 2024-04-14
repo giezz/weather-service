@@ -12,21 +12,21 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "hum_data")
-public class HumDatum {
+@Table
+public class LightData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column
     private Integer id;
 
-    @Column(name = "hum_value", precision = 10, scale = 1)
-    private BigDecimal humValue;
+    @Column
+    private BigDecimal lightValue;
 
-    @Column(name = "created_at")
+    @Column
     private Instant createdAt;
 
-    public HumDatum(BigDecimal humValue, Instant createdAt) {
-        this.humValue = humValue;
+    public LightData(BigDecimal lightValue, Instant createdAt) {
+        this.lightValue = lightValue;
         this.createdAt = createdAt;
     }
 }
